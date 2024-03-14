@@ -7,9 +7,14 @@ module.exports = {
     index: "./src/index.js",
     print: "./src/print.js",
   },
+  devtool: "inline-source-map",
+  // webpack-dev-server serves bundled files from the directory defined in output.path, i.e., files will be available under http://[devServer.host]:[devServer.port]/[output.publicPath]/[output.filename].
+  devServer: {
+    static: "./dist",
+  },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Output Management",
+      title: "Development",
     }),
   ],
   output: {
@@ -17,6 +22,9 @@ module.exports = {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
+  },
+  optimization: {
+    runtimeChunk: "single",
   },
   module: {
     rules: [
